@@ -4,16 +4,13 @@
 # You must provide a value for each of these parameters.
 # ------------------------------------------------------------------------------
 
-variable "aws_region" {
-  description = "The AWS region to deploy into (e.g. us-east-1)"
+variable "ssm_parameters" {
+  type        = list(string)
+  description = "The AWS SSM parameters that the IAM user needs to be able to read (e.g. [\"/example/parameter1\", \"/example/config\"])."
 }
 
-variable "aws_availability_zone" {
-  description = "The AWS availability zone to deploy into (e.g. a, b, c, etc.)"
-}
-
-variable "subnet_id" {
-  description = "The ID of the AWS subnet to deploy into (e.g. subnet-0123456789abcdef0)"
+variable "user_name" {
+  description = "The name to associate with the AWS IAM user (e.g. test-ami-build-iam-user-tf-module)."
 }
 
 # ------------------------------------------------------------------------------
@@ -21,6 +18,21 @@ variable "subnet_id" {
 #
 # These parameters have reasonable defaults.
 # ------------------------------------------------------------------------------
+
+variable "ec2amicreate_policy_name" {
+  description = "The name of the IAM policy in the Images account that allows all of the actions needed to create an AMI."
+  default     = "EC2AMICreate"
+}
+
+variable "ec2amicreate_role_description" {
+  description = "The description to associate with the IAM role that allows this IAM user to create AMIs.  Note that a \"%s\" in this value will get replaced with the user_name variable."
+  default     = "Allows the %s IAM user to create AMIs."
+}
+
+variable "ec2amicreate_role_name" {
+  description = "The name to assign the IAM role that allows allows this IAM user to create AMIs.  Note that a \"%s\" in this value will get replaced with the user_name variable."
+  default     = "EC2AMICreate-%s"
+}
 
 variable "tags" {
   type        = map(string)
