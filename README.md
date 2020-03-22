@@ -2,57 +2,54 @@
 
 [![GitHub Build Status](https://github.com/cisagov/ami-build-iam-user-tf-module/workflows/build/badge.svg)](https://github.com/cisagov/ami-build-iam-user-tf-module/actions)
 
-This is a generic skeleton project that can be used to quickly get a
-new [cisagov](https://github.com/cisagov) [Terraform
-module](https://www.terraform.io/docs/modules/index.html) GitHub
-repository started.  This skeleton project contains [licensing
-information](LICENSE), as well as [pre-commit
-hooks](https://pre-commit.com) and
-[GitHub Actions](https://github.com/features/actions) configurations
-appropriate for the major languages that we use.
-
-See [here](https://www.terraform.io/docs/modules/index.html) for more
-details on Terraform modules and the standard module structure.
+A Terraform module for creating an IAM user suitable for building
+Amazon Machine Images (AMIs).
 
 ## Usage ##
 
 ```hcl
 module "example" {
-  source = "github.com/cisagov/ami-build-iam-user-tf-module"
+  source = "../.."
 
-  aws_region            = "us-west-1"
-  aws_availability_zone = "b"
-  subnet_id             = "subnet-0123456789abcdef0"
+  providers = {
+    aws                       = aws
+    aws.images-production-ami = aws.images-production-ami
+    aws.images-staging-ami    = aws.images-staging-ami
+    aws.images-production-ssm = aws.images-production-ssm
+    aws.images-staging-ssm    = aws.images-staging-ssm
+  }
+
+  ssm_parameters = ["/example/parameter1", "/example/config"]
+  user_name      = "test-ami-build-iam-user-tf-module"
 
   tags = {
-    Key1 = "Value1"
-    Key2 = "Value2"
+    Team        = "VM Fusion - Development"
+    Application = "ami-build-iam-user-tf-module testing"
   }
 }
 ```
 
 ## Examples ##
 
-* [Deploying into the default VPC](https://github.com/cisagov/ami-build-iam-user-tf-module/tree/develop/examples/default_vpc)
+* [Create an AWS IAM user capable of building AMIs](https://github.com/cisagov/ami-build-iam-user-tf-module/tree/develop/examples/default_vpc)
 
 ## Inputs ##
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-------:|:--------:|
-| aws_region | The AWS region to deploy into (e.g. us-east-1) | string | | yes |
-| aws_availability_zone | The AWS availability zone to deploy into (e.g. a, b, c, etc.) | string | | yes |
-| subnet_id | The ID of the AWS subnet to deploy into (e.g. subnet-0123456789abcdef0) | string | | yes |
+| ec2amicreate_policy_name | The name of the IAM policy in the Images account that allows all of the actions needed to create an AMI. | string | `EC2AMICreate` | no |
+| ec2amicreate_role_description | The description to associate with the IAM role that allows this IAM user to create AMIs.  Note that a "%s" in this value will get replaced with the user_name variable. | string | `Allows the %s IAM user to create AMIs` | no |
+| ec2amicreate_role_name | The name to assign the IAM role that allows allows this IAM user to create AMIs.  Note that a "%s" in this value will get replaced with the user_name variable. | string | `EC2AMICreate-%s` | no |
+| ssm_parameters | The AWS SSM parameters that the IAM user needs to be able to read (e.g. ["/example/parameter1", "/example/config/*"]). | list(string) | | yes |
+| user_name | The name to associate with the AWS IAM user (e.g. test-molecule-iam-user-tf-module) | string | | yes |
 | tags | Tags to apply to all AWS resources created | map(string) | `{}` | no |
 
 ## Outputs ##
 
 | Name | Description |
 |------|-------------|
-| id | The EC2 instance ID |
-| arn | The EC2 instance ARN |
-| availability_zone | The AZ where the EC2 instance is deployed |
-| private_ip | The private IP of the EC2 instance |
-| subnet_id | The ID of the subnet where the EC2 instance is deployed |
+| access_key | The IAM access key associated with the IAM user created by this module. |
+| user | The IAM user created by this module. |
 
 ## Contributing ##
 
