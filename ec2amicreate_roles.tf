@@ -13,7 +13,7 @@ resource "aws_iam_role" "ec2amicreate_role_production" {
   name               = local.ec2amicreate_role_name
   tags = merge(var.tags,
     {
-      "GitHub_Secret_Name"             = "BUILD_ROLE_TO_ASSUME",
+      "GitHub_Secret_Name"             = "BUILD_ROLE_TO_ASSUME_PRODUCTION",
       "GitHub_Secret_Terraform_Lookup" = "arn"
     }
   )
@@ -45,7 +45,7 @@ resource "aws_iam_role" "ec2amicreate_role_staging" {
   name               = local.ec2amicreate_role_name
   tags = merge(var.tags,
     {
-      "GitHub_Secret_Name"             = "BUILD_ROLE_TO_ASSUME",
+      "GitHub_Secret_Name"             = "BUILD_ROLE_TO_ASSUME_STAGING",
       "GitHub_Secret_Terraform_Lookup" = "arn"
     }
   )
