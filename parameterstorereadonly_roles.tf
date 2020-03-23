@@ -12,9 +12,9 @@ module "parameterstorereadonly_role_production" {
   }
 
   account_ids  = [local.users_account_id]
+  entity_name  = var.user_name
   iam_username = var.user_name
   ssm_names    = var.ssm_parameters
-  user         = var.user_name
 }
 
 module "parameterstorereadonly_role_staging" {
@@ -25,7 +25,7 @@ module "parameterstorereadonly_role_staging" {
   }
 
   account_ids  = [local.users_account_id]
+  entity_name  = var.user_name
   iam_username = var.user_name
   ssm_names    = var.ssm_parameters
-  user         = var.user_name
 }
