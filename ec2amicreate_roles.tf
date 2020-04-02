@@ -8,9 +8,10 @@
 resource "aws_iam_role" "ec2amicreate_role_production" {
   provider = aws.images-production-ami
 
-  assume_role_policy = data.aws_iam_policy_document.assume_role_doc.json
-  description        = local.ec2amicreate_role_description
-  name               = local.ec2amicreate_role_name
+  assume_role_policy   = data.aws_iam_policy_document.assume_role_doc.json
+  description          = local.ec2amicreate_role_description
+  max_session_duration = var.ec2amicreate_role_max_session_duration
+  name                 = local.ec2amicreate_role_name
   tags = merge(var.tags,
     {
       "GitHub_Secret_Name"             = "BUILD_ROLE_TO_ASSUME_PRODUCTION",
@@ -40,9 +41,10 @@ resource "aws_iam_role_policy_attachment" "parameterstorereadonly_policy_attachm
 resource "aws_iam_role" "ec2amicreate_role_staging" {
   provider = aws.images-staging-ami
 
-  assume_role_policy = data.aws_iam_policy_document.assume_role_doc.json
-  description        = local.ec2amicreate_role_description
-  name               = local.ec2amicreate_role_name
+  assume_role_policy   = data.aws_iam_policy_document.assume_role_doc.json
+  description          = local.ec2amicreate_role_description
+  max_session_duration = var.ec2amicreate_role_max_session_duration
+  name                 = local.ec2amicreate_role_name
   tags = merge(var.tags,
     {
       "GitHub_Secret_Name"             = "BUILD_ROLE_TO_ASSUME_STAGING",
