@@ -32,6 +32,12 @@ variable "ec2amicreate_role_description" {
   default     = "Allows the %s IAM user to create AMIs."
 }
 
+variable "ec2amicreate_role_max_session_duration" {
+  type        = number
+  description = "The maximum session duration (in seconds) when assuming the IAM role that allows this IAM user to create AMIs."
+  default     = 3600
+}
+
 variable "ec2amicreate_role_name" {
   type        = string
   description = "The name to assign the IAM role that allows allows this IAM user to create AMIs.  Note that a \"%s\" in this value will get replaced with the user_name variable."
