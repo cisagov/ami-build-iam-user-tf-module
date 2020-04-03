@@ -39,6 +39,7 @@ module "example" {
 |------|-------------|:----:|:-------:|:--------:|
 | ec2amicreate_policy_name | The name of the IAM policy in the Images account that allows all of the actions needed to create an AMI. | string | `EC2AMICreate` | no |
 | ec2amicreate_role_description | The description to associate with the IAM role that allows this IAM user to create AMIs.  Note that a "%s" in this value will get replaced with the user_name variable. | string | `Allows the %s IAM user to create AMIs` | no |
+| ec2amicreate_role_max_session_duration | The maximum session duration (in seconds) when assuming the IAM role that allows this IAM user to create AMIs. | number | `3600` | no |
 | ec2amicreate_role_name | The name to assign the IAM role that allows allows this IAM user to create AMIs.  Note that a "%s" in this value will get replaced with the user_name variable. | string | `EC2AMICreate-%s` | no |
 | ssm_parameters | The AWS SSM parameters that the IAM user needs to be able to read (e.g. ["/example/parameter1", "/example/config/*"]). | list(string) | | yes |
 | user_name | The name to associate with the AWS IAM user (e.g. test-molecule-iam-user-tf-module) | string | | yes |
