@@ -37,6 +37,8 @@ module "example" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-------:|:--------:|
+| additional_policy_arns_production | The list of additional Production IAM policy ARNs to attach to this IAM user (e.g. ["arn:aws:iam::111111111111:policy/ReadFromMyBucket", "arn:aws:iam::111111111111:policy/ReadFromMyOtherBucket"]). | list(string) | `[]` | no |
+| additional_policy_arns_staging | The list of additional Staging IAM policy ARNs to attach to this IAM user (e.g. ["arn:aws:iam::222222222222:policy/ReadFromMyBucket", "arn:aws:iam::222222222222:policy/ReadFromMyOtherBucket"]). | list(string) | `[]` | no |
 | ec2amicreate_policy_name | The name of the IAM policy in the Images account that allows all of the actions needed to create an AMI. | string | `EC2AMICreate` | no |
 | ec2amicreate_role_description | The description to associate with the IAM role that allows this IAM user to create AMIs.  Note that a "%s" in this value will get replaced with the user_name variable. | string | `Allows the %s IAM user to create AMIs` | no |
 | ec2amicreate_role_max_session_duration | The maximum session duration (in seconds) when assuming the IAM role that allows this IAM user to create AMIs. | number | `3600` | no |
