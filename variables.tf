@@ -20,6 +20,18 @@ variable "user_name" {
 # These parameters have reasonable defaults.
 # ------------------------------------------------------------------------------
 
+variable "additional_policy_arns_production" {
+  type        = list(string)
+  description = "The list of additional Production IAM policy ARNs to attach to this IAM user (e.g. [\"arn:aws:iam::123456789012:policy/ReadFromMyBucket\", \"arn:aws:iam::123456789012:policy/ReadFromMyOtherBucket\"])."
+  default     = []
+}
+
+variable "additional_policy_arns_staging" {
+  type        = list(string)
+  description = "The list of additional Staging IAM policy ARNs to attach to this IAM user (e.g. [\"arn:aws:iam::123456789012:policy/ReadFromMyBucket\", \"arn:aws:iam::123456789012:policy/ReadFromMyOtherBucket\"])."
+  default     = []
+}
+
 variable "ec2amicreate_policy_name" {
   type        = string
   description = "The name of the IAM policy in the Images account that allows all of the actions needed to create an AMI."
