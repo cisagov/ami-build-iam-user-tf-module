@@ -13,4 +13,6 @@ Note that this example may create resources which cost money. Run
 | Name | Description |
 |------|-------------|
 | access_key | The IAM access key for the test-ami-build-iam-user-tf-module user. |
+| ec2amicreate_role_production | The IAM role that allows creation of AMIs in Production by the test-ami-build-iam-user-tf-module user. |
+| ec2amicreate_role_staging | The IAM role that allows creation of AMIs in Staging by the test-ami-build-iam-user-tf-module user. |
 | user | The test-ami-build-iam-user-tf-module IAM user. |
