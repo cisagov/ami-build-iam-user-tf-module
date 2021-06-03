@@ -55,9 +55,3 @@ variable "ec2amicreate_role_name" {
   description = "The name to assign the IAM role that allows allows this IAM user to create AMIs.  Note that a \"%s\" in this value will get replaced with the user_name variable."
   default     = "EC2AMICreate-%s"
 }
-
-variable "tags" {
-  type        = map(string)
-  description = "Tags to apply to all AWS resources created"
-  default     = {}
-}
