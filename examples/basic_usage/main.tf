@@ -1,37 +1,59 @@
+locals {
+  tags = {
+    Team        = "VM Fusion - Development"
+    Application = "ami-build-iam-user-tf-module testing"
+  }
+}
+
 # Default AWS provider (ProvisionAccount for the Users account)
 provider "aws" {
-  region  = "us-east-1"
+  default_tags {
+    tags = local.tags
+  }
   profile = "cool-users-provisionaccount"
+  region  = "us-east-1"
 }
 
 # ProvisionEC2AMICreateRoles AWS provider for the Images (Production) account
 provider "aws" {
-  region  = "us-east-1"
+  alias = "images-production-ami"
+  default_tags {
+    tags = local.tags
+  }
   profile = "cool-images-production-provisionec2amicreateroles"
-  alias   = "images-production-ami"
+  region  = "us-east-1"
 }
 
 # ProvisionEC2AMICreateRoles AWS provider for the Images (Staging) account
 provider "aws" {
-  region  = "us-east-1"
+  alias = "images-staging-ami"
+  default_tags {
+    tags = local.tags
+  }
   profile = "cool-images-staging-provisionec2amicreateroles"
-  alias   = "images-staging-ami"
+  region  = "us-east-1"
 }
 
 # ProvisionParameterStoreReadRoles AWS provider for the
 # Images (Production) account
 provider "aws" {
-  region  = "us-east-1"
+  alias = "images-production-ssm"
+  default_tags {
+    tags = local.tags
+  }
   profile = "cool-images-production-provisionparameterstorereadroles"
-  alias   = "images-production-ssm"
+  region  = "us-east-1"
 }
 
 # ProvisionParameterStoreReadRoles AWS provider for the
 # Images (Staging) account
 provider "aws" {
-  region  = "us-east-1"
+  alias = "images-staging-ssm"
+  default_tags {
+    tags = local.tags
+  }
   profile = "cool-images-staging-provisionparameterstorereadroles"
-  alias   = "images-staging-ssm"
+  region  = "us-east-1"
 }
 
 module "iam_user_with_ssm_read" {
@@ -47,9 +69,4 @@ module "iam_user_with_ssm_read" {
 
   ssm_parameters = ["/example/parameter1", "/example/config"]
   user_name      = "test-ami-build-iam-user-tf-module"
-
-  tags = {
-    Team        = "VM Fusion - Development"
-    Application = "ami-build-iam-user-tf-module testing"
-  }
 }

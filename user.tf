@@ -23,5 +23,4 @@ module "ci_user" {
     "GitHub_Secret_Terraform_Lookup" = "arn",
   }
   user_name = var.user_name
-  tags      = var.tags
 }
