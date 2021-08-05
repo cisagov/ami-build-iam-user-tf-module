@@ -26,7 +26,7 @@ module "example" {
 
 ## Examples ##
 
-* [Create an AWS IAM user capable of building AMIs](https://github.com/cisagov/ami-build-iam-user-tf-module/tree/develop/examples/default_vpc)
+- [Create an AWS IAM user capable of building AMIs](https://github.com/cisagov/ami-build-iam-user-tf-module/tree/develop/examples/default_vpc)
 
 ## Requirements ##
 
