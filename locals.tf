@@ -12,6 +12,10 @@ data "aws_caller_identity" "images_staging" {
 }
 
 locals {
+  # Toggle whether or not to create the parameterstorereadonly_role resources
+  # based on whether or not the ssm_parameters variable is populated.
+  create_parameterstorereadonly_role_resources = (length(var.ssm_parameters) > 0) ? 1 : 0
+
   # If var.ec2amicreate_role_description contains "%s", use format()
   # to replace the "%s" with var.user_name, otherwise just use
   # var.ec2amicreate_role_description as is

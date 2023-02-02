@@ -6,6 +6,7 @@
 
 module "parameterstorereadonly_role_production" {
   source = "github.com/cisagov/ssm-read-role-tf-module"
+  count  = local.create_parameterstorereadonly_role_resources
 
   providers = {
     aws = aws.images-production-ssm
@@ -19,6 +20,7 @@ module "parameterstorereadonly_role_production" {
 
 module "parameterstorereadonly_role_staging" {
   source = "github.com/cisagov/ssm-read-role-tf-module"
+  count  = local.create_parameterstorereadonly_role_resources
 
   providers = {
     aws = aws.images-staging-ssm

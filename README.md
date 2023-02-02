@@ -75,7 +75,7 @@ module "example" {
 | ec2amicreate\_role\_description | The description to associate with the IAM role that allows this IAM user to create AMIs.  Note that a "%s" in this value will get replaced with the user\_name variable. | `string` | `"Allows the %s IAM user to create AMIs."` | no |
 | ec2amicreate\_role\_max\_session\_duration | The maximum session duration (in seconds) when assuming the IAM role that allows this IAM user to create AMIs. | `number` | `3600` | no |
 | ec2amicreate\_role\_name | The name to assign the IAM role that allows allows this IAM user to create AMIs.  Note that a "%s" in this value will get replaced with the user\_name variable. | `string` | `"EC2AMICreate-%s"` | no |
-| ssm\_parameters | The AWS SSM parameters that the IAM user needs to be able to read (e.g. ["/example/parameter1", "/example/config"]). | `list(string)` | n/a | yes |
+| ssm\_parameters | The AWS SSM parameters that the IAM user needs to be able to read (e.g. ["/example/parameter1", "/example/config"]). | `list(string)` | `[]` | no |
 | user\_name | The name to associate with the AWS IAM user (e.g. test-ami-build-iam-user-tf-module). | `string` | n/a | yes |
 
 ## Outputs ##
