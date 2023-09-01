@@ -10,9 +10,10 @@ resource "aws_iam_role_policy_attachment" "ec2amicreate_policy_attachment_produc
 # Attach the Production ParameterStoreReadOnly policy to the
 # Production EC2AMICreate role
 resource "aws_iam_role_policy_attachment" "parameterstorereadonly_policy_attachment_production" {
+  count    = local.create_parameterstorereadonly_role_resources
   provider = aws.images-production-ami
 
-  policy_arn = module.parameterstorereadonly_role_production.policy.arn
+  policy_arn = module.parameterstorereadonly_role_production[0].policy.arn
   role       = module.ci_user.production_role.name
 }
 
@@ -28,8 +29,9 @@ resource "aws_iam_role_policy_attachment" "ec2amicreate_policy_attachment_stagin
 # Attach the Staging ParameterStoreReadOnly policy to the Staging
 # EC2AMICreate role
 resource "aws_iam_role_policy_attachment" "parameterstorereadonly_policy_attachment_staging" {
+  count    = local.create_parameterstorereadonly_role_resources
   provider = aws.images-staging-ami
 
-  policy_arn = module.parameterstorereadonly_role_staging.policy.arn
+  policy_arn = module.parameterstorereadonly_role_staging[0].policy.arn
   role       = module.ci_user.staging_role.name
 }
