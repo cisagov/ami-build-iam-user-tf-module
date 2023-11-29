@@ -28,20 +28,21 @@ module "example" {
 
 - [Basic usage](https://github.com/cisagov/ami-build-iam-user-tf-module/tree/develop/examples/basic_usage)
 
+<!-- BEGIN_TF_DOCS -->
 ## Requirements ##
 
 | Name | Version |
 |------|---------|
 | terraform | ~> 1.0 |
-| aws | ~> 3.38 |
+| aws | ~> 4.9 |
 
 ## Providers ##
 
 | Name | Version |
 |------|---------|
-| aws | ~> 3.38 |
-| aws.images-production-ami | ~> 3.38 |
-| aws.images-staging-ami | ~> 3.38 |
+| aws | ~> 4.9 |
+| aws.images-production-ami | ~> 4.9 |
+| aws.images-staging-ami | ~> 4.9 |
 
 ## Modules ##
 
@@ -86,6 +87,7 @@ module "example" {
 | ec2amicreate\_role\_production | The IAM role that the CI user can assume in the production account to create AMIs. |
 | ec2amicreate\_role\_staging | The IAM role that the CI user can assume in the staging account to create AMIs. |
 | user | The IAM user created by this module. |
+<!-- END_TF_DOCS -->
 
 ## Notes ##
 
