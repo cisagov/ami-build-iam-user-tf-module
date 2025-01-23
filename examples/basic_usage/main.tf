@@ -14,45 +14,23 @@ provider "aws" {
   region  = "us-east-1"
 }
 
-# ProvisionEC2AMICreateRoles AWS provider for the Images (Production) account
+# ProvisionEC2AMICreateRoles AWS provider for the Images account
 provider "aws" {
-  alias = "images-production-ami"
+  alias = "images-ami"
   default_tags {
     tags = local.tags
   }
-  profile = "cool-images-production-provisionec2amicreateroles"
+  profile = "cool-images-provisionec2amicreateroles"
   region  = "us-east-1"
 }
 
-# ProvisionEC2AMICreateRoles AWS provider for the Images (Staging) account
+# ProvisionParameterStoreReadRoles AWS provider for the Images account
 provider "aws" {
-  alias = "images-staging-ami"
+  alias = "images-ssm"
   default_tags {
     tags = local.tags
   }
-  profile = "cool-images-staging-provisionec2amicreateroles"
-  region  = "us-east-1"
-}
-
-# ProvisionParameterStoreReadRoles AWS provider for the
-# Images (Production) account
-provider "aws" {
-  alias = "images-production-ssm"
-  default_tags {
-    tags = local.tags
-  }
-  profile = "cool-images-production-provisionparameterstorereadroles"
-  region  = "us-east-1"
-}
-
-# ProvisionParameterStoreReadRoles AWS provider for the
-# Images (Staging) account
-provider "aws" {
-  alias = "images-staging-ssm"
-  default_tags {
-    tags = local.tags
-  }
-  profile = "cool-images-staging-provisionparameterstorereadroles"
+  profile = "cool-images-provisionparameterstorereadroles"
   region  = "us-east-1"
 }
 
@@ -60,11 +38,9 @@ module "iam_user_with_ssm_read" {
   source = "../.."
 
   providers = {
-    aws                       = aws
-    aws.images-production-ami = aws.images-production-ami
-    aws.images-staging-ami    = aws.images-staging-ami
-    aws.images-production-ssm = aws.images-production-ssm
-    aws.images-staging-ssm    = aws.images-staging-ssm
+    aws            = aws
+    aws.images-ami = aws.images-ami
+    aws.images-ssm = aws.images-ssm
   }
 
   ssm_parameters = ["/example/parameter1", "/example/config"]

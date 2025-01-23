@@ -3,12 +3,8 @@
 data "aws_caller_identity" "users" {
 }
 
-data "aws_caller_identity" "images_production" {
-  provider = aws.images-production-ami
-}
-
-data "aws_caller_identity" "images_staging" {
-  provider = aws.images-staging-ami
+data "aws_caller_identity" "images" {
+  provider = aws.images-ami
 }
 
 locals {
@@ -27,9 +23,7 @@ locals {
   ec2amicreate_role_name = length(regexall(".*%s.*", var.ec2amicreate_role_name)) > 0 ? format(var.ec2amicreate_role_name, var.user_name) : var.ec2amicreate_role_name
 
   # Grab all of the necessary account IDs
-  images_production_account_id = data.aws_caller_identity.images_production.account_id
-
-  images_staging_account_id = data.aws_caller_identity.images_staging.account_id
+  images_account_id = data.aws_caller_identity.images.account_id
 
   users_account_id = data.aws_caller_identity.users.account_id
 }

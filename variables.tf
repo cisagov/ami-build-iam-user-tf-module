@@ -16,16 +16,9 @@ variable "user_name" {
 # These parameters have reasonable defaults.
 # ------------------------------------------------------------------------------
 
-variable "additional_policy_arns_production" {
+variable "additional_policy_arns" {
   default     = []
-  description = "The list of additional Production IAM policy ARNs to attach to this IAM user (e.g. [\"arn:aws:iam::123456789012:policy/ReadFromMyBucket\", \"arn:aws:iam::123456789012:policy/ReadFromMyOtherBucket\"])."
-  nullable    = false
-  type        = list(string)
-}
-
-variable "additional_policy_arns_staging" {
-  default     = []
-  description = "The list of additional Staging IAM policy ARNs to attach to this IAM user (e.g. [\"arn:aws:iam::123456789012:policy/ReadFromMyBucket\", \"arn:aws:iam::123456789012:policy/ReadFromMyOtherBucket\"])."
+  description = "The list of additional IAM policy ARNs to attach to this IAM user (e.g. [\"arn:aws:iam::123456789012:policy/ReadFromMyBucket\", \"arn:aws:iam::123456789012:policy/ReadFromMyOtherBucket\"])."
   nullable    = false
   type        = list(string)
 }
@@ -53,9 +46,19 @@ variable "ec2amicreate_role_max_session_duration" {
 
 variable "ec2amicreate_role_name" {
   default     = "EC2AMICreate-%s"
-  description = "The name to assign the IAM role that allows allows this IAM user to create AMIs.  Note that a \"%s\" in this value will get replaced with the user_name variable."
+  description = "The name to assign the IAM role that allows this IAM user to create AMIs.  Note that a \"%s\" in this value will get replaced with the user_name variable."
   nullable    = false
   type        = string
+}
+
+variable "ec2amicreate_role_tags" {
+  default = {
+    "GitHub_Secret_Name"             = "BUILD_ROLE_TO_ASSUME",
+    "GitHub_Secret_Terraform_Lookup" = "arn",
+  }
+  description = "Extra tags to apply to the IAM role that allows this IAM user to create AMIs."
+  nullable    = false
+  type        = map(string)
 }
 
 variable "ssm_parameters" {

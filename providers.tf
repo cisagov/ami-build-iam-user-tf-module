@@ -1,25 +1,11 @@
 # This is the provider that is used to create the policy that can
-# create AMIs inside the Images Production account.
+# create AMIs inside the Images account.
 provider "aws" {
-  alias = "images-production-ami"
-}
-
-# This is the provider that is used to create the policy that can
-# create AMIs inside the Images Staging account.
-provider "aws" {
-  alias = "images-staging-ami"
+  alias = "images-ami"
 }
 
 # This is the provider that is used to create the role and policy that
-# can read Parameter Store parameters inside the Images Production
-# account.
+# can read Parameter Store parameters inside the Images account.
 provider "aws" {
-  alias = "images-production-ssm"
-}
-
-# This is the provider that is used to create the role and policy that
-# can read Parameter Store parameters inside the Images Staging
-# account.
-provider "aws" {
-  alias = "images-staging-ssm"
+  alias = "images-ssm"
 }

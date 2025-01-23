@@ -1,33 +1,18 @@
 # ------------------------------------------------------------------------------
-# Create the IAM roles and policies that allow read-only access
-# to the specified SSM Parameter Store parameters in the
-# Images accounts (Production and Staging).
+# Create the IAM role and policy that allow read-only access to the specified
+# SSM Parameter Store parameters in the Images account.
 # ------------------------------------------------------------------------------
 
-module "parameterstorereadonly_role_production" {
+module "parameterstorereadonly_role" {
   source = "github.com/cisagov/ssm-read-role-tf-module"
   count  = local.create_parameterstorereadonly_role_resources
 
   providers = {
-    aws = aws.images-production-ssm
+    aws = aws.images-ssm
   }
 
   account_ids   = [local.users_account_id]
-  entity_name   = module.ci_user.user.name
-  iam_usernames = [module.ci_user.user.name]
-  ssm_names     = var.ssm_parameters
-}
-
-module "parameterstorereadonly_role_staging" {
-  source = "github.com/cisagov/ssm-read-role-tf-module"
-  count  = local.create_parameterstorereadonly_role_resources
-
-  providers = {
-    aws = aws.images-staging-ssm
-  }
-
-  account_ids   = [local.users_account_id]
-  entity_name   = module.ci_user.user.name
-  iam_usernames = [module.ci_user.user.name]
+  entity_name   = aws_iam_user.build.name
+  iam_usernames = [aws_iam_user.build.name]
   ssm_names     = var.ssm_parameters
 }
