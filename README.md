@@ -9,7 +9,7 @@ Amazon Machine Images (AMIs).
 
 ```hcl
 module "example" {
-  source = "../.."
+  source = "github.com/cisagov/ami-build-iam-user-tf-module?ref=v1.0.0"
 
   providers = {
     aws                       = aws
