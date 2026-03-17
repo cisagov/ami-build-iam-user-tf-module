@@ -32,14 +32,14 @@ module "example" {
 ## Requirements ##
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | terraform | >= 1.1 |
 | aws | >= 4.9 |
 
 ## Providers ##
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | aws | >= 4.9 |
 | aws.images-ami | >= 4.9 |
 | aws.images-ssm | >= 4.9 |
@@ -47,13 +47,13 @@ module "example" {
 ## Modules ##
 
 | Name | Source | Version |
-|------|--------|---------|
+| ---- | ------ | ------- |
 | parameterstorereadonly\_role | github.com/cisagov/ssm-read-role-tf-module | n/a |
 
 ## Resources ##
 
 | Name | Type |
-|------|------|
+| ---- | ---- |
 | [aws_iam_access_key.build](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_access_key) | resource |
 | [aws_iam_role.ec2amicreate](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
 | [aws_iam_role_policy_attachment.additional_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
@@ -69,7 +69,7 @@ module "example" {
 ## Inputs ##
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
+| ---- | ----------- | ---- | ------- | :------: |
 | additional\_policy\_arns | The list of additional IAM policy ARNs to attach to this IAM user (e.g. ["arn:aws:iam::123456789012:policy/ReadFromMyBucket", "arn:aws:iam::123456789012:policy/ReadFromMyOtherBucket"]). | `list(string)` | `[]` | no |
 | ec2amicreate\_policy\_name | The name of the IAM policy in the Images account that allows all of the actions needed to create an AMI. | `string` | `"EC2AMICreate"` | no |
 | ec2amicreate\_role\_description | The description to associate with the IAM role that allows this IAM user to create AMIs.  Note that a "%s" in this value will get replaced with the user\_name variable. | `string` | `"Allows the %s IAM user to create AMIs."` | no |
@@ -82,7 +82,7 @@ module "example" {
 ## Outputs ##
 
 | Name | Description |
-|------|-------------|
+| ---- | ----------- |
 | access\_key | The IAM access key associated with the IAM user created by this module. |
 | ec2amicreate\_role | The IAM role that the CI user can assume to create AMIs. |
 | user | The IAM user created by this module. |
