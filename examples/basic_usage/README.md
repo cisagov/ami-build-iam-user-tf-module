@@ -12,7 +12,7 @@ Note that this example may create resources which cost money. Run
 ## Requirements ##
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | terraform | ~> 1.1 |
 | aws | ~> 6.7 |
 
@@ -23,7 +23,7 @@ No providers.
 ## Modules ##
 
 | Name | Source | Version |
-|------|--------|---------|
+| ---- | ------ | ------- |
 | iam\_user\_with\_ssm\_read | ../.. | n/a |
 
 ## Resources ##
@@ -37,7 +37,7 @@ No inputs.
 ## Outputs ##
 
 | Name | Description |
-|------|-------------|
+| ---- | ----------- |
 | access\_key | The IAM access key for the test-ami-build-iam-user-tf-module user. |
 | ec2amicreate\_role | The IAM role that allows creation of AMIs by the test-ami-build-iam-user-tf-module user. |
 | user | The test-ami-build-iam-user-tf-module IAM user. |
